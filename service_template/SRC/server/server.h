@@ -14,7 +14,7 @@
 
 #include "log.h"
 
-#define USER_DB_PATH "/home/load/usr.db"
+#define USER_DB_PATH "./usr.db"
 #define DB_TABLE_NAME "usr_info"
 #define MSGLEN 100
 

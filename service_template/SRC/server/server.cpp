@@ -16,6 +16,9 @@
 #include "server.h"
 #include "md5.h"
 
+#include <regex>
+
+
 //get listen socket on port.
 //return listen socket if success,-1 if error.
 static int open_listenfd(int port)
@@ -387,10 +390,16 @@ static int sqlCallBack(void* arg,int argc,char* argv[],char *azColName[])
 //receive usr and pass message,check for login.
 int Server::do_user(std::string arg)
 {
+	std::regex filterString("^[a-zA-Z0-9]*$");
 	std::string username = arg;
+
+
 	sendMsg("331 Please specify the password.");
 	std::string command,password;
 	recvMsg(command,password);
+
+
+
 	int com_num = findCommand(command);
 	while(com_num != PASS)
 	{
@@ -398,8 +407,25 @@ int Server::do_user(std::string arg)
 		recvMsg(command,password);
 		com_num = findCommand(command);
 	}
-	if(username.size() == 0 || password.size() == 0)
+	is_login = false;
+	if(username.size() == 0 || password.size() == 0 || username.size() > 32 || password.size() > 32)
 	{
+		return 0;
+	}
+	if(std::regex_match(username, filterString))
+	{
+		printf("[!] regex : ^[a-zA-Z0-9]*$\n");
+		return 0;
+	}
+
+	if(std::regex_match(password, filterString))
+	{
+		printf("[!] regex : ^[a-zA-Z0-9]*$\n");
+		return 0;
+	}
+	if(std::regex_match(command, filterString))
+	{
+		printf("[!] regex : ^[a-zA-Z0-9]*$\n");
 		return 0;
 	}
 	std::string hash_password = hash(password);//get the hashed password.
