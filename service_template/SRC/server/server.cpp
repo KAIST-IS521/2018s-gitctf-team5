@@ -802,7 +802,7 @@ int Server::getFileInfo(std::string file_path,std::string file_name,std::string&
 	}
 
 	char temp1[100];
-	snprintf(temp1,sizeof(temp2),"%2d %d %d %4ld",(int)st.st_nlink,pw_num,gr_num,st.st_size);
+	snprintf(temp1,sizeof(temp1),"%2d %d %d %4ld",(int)st.st_nlink,pw_num,gr_num,st.st_size);
 
 	ret += temp1;
 

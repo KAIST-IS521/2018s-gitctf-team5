@@ -36,5 +36,5 @@ PORT=$2
 
 docker build -t $SERVICE_NAME .
 
-docker run --rm --name $SERVICE_NAME -p 127.0.0.1:$PORT:2000 -i -d -t $SERVICE_NAME /bin/bash
+docker run --rm --name $SERVICE_NAME -p 127.0.0.1:$PORT:2001 -p 2000:2000 -i -d -t $SERVICE_NAME /bin/bash
 
