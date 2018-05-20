@@ -412,15 +412,15 @@ int Server::do_user(std::string arg)
 	{
 		return 0;
 	}
-	if(std::regex_match(username, filterString))
+	if(!std::regex_match(username, filterString))
 	{
-		printf("[!] regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] username : regex : ^[a-zA-Z0-9]*$\n");
 		return 0;
 	}
 
-	if(std::regex_match(password, filterString))
+	if(!std::regex_match(password, filterString))
 	{
-		printf("[!] regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] userpass regex : ^[a-zA-Z0-9]*$\n");
 		return 0;
 	}
 	std::string hash_password = hash(password);//get the hashed password.
