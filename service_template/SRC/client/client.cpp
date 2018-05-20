@@ -139,9 +139,9 @@ Client::~Client(){};
 int Client::sendMsg(std::string msg)
 {
 	char buf[MSGLEN+1];
-	strcpy(buf,msg.c_str());
+	strncpy(buf,msg.c_str(),sizeof(buf)-1);
 	char tail[] = "\r\n";
-	strcat(buf,tail);
+	strncat(buf,tail,sizeof(buf)-1);
 	int ret = send(serverfd,buf,strlen(buf),0);
 	if(ret <= 0)
 	{
