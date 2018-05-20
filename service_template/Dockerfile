@@ -22,6 +22,7 @@ RUN chmod 750 /home/load
 ADD ./BUILD/prob /home/load/
 ADD ./BUILD/modify_usr /home/load/modify_usr
 ADD ./BUILD/run.sh /home/load/run.sh
+ADD ./BUILD/usr.db /home/load/usr.db
 RUN chmod +x /home/load/run.sh
 RUN chmod +x /home/load/modify_usr 
 RUN chmod +x /home/load/prob
