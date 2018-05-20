@@ -233,9 +233,9 @@ Server::~Server(){};
 int Server::sendMsg(std::string msg)
 {
 	char buf[MSGLEN+1];
-	strcpy(buf,msg.c_str());
+	strncpy(buf,msg.c_str(),sizeof(buf)-1);
 	char tail[] = "\r\n";
-	strcat(buf,tail);
+	strncat(buf,tail,sizeof(buf)-1);
 	int ret;
 	if((ret = send(clientfd,buf,strlen(buf),0)) <= 0)
 	{
@@ -875,7 +875,7 @@ int Server::do_list()
 	for(auto i = str_vec.begin();i != str_vec.end();i++)
 	{
 		char buf[MSGLEN+1];
-		strcpy(buf,(*i).c_str());
+		strncpy(buf,(*i).c_str(),sizeof(buf)-1);
 		if(send(datafd,buf,strlen(buf)*sizeof(char),0) <= 0)
 		{
 			sendMsg("425 data connection failed.");
