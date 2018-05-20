@@ -423,11 +423,6 @@ int Server::do_user(std::string arg)
 		printf("[!] regex : ^[a-zA-Z0-9]*$\n");
 		return 0;
 	}
-	if(std::regex_match(command, filterString))
-	{
-		printf("[!] regex : ^[a-zA-Z0-9]*$\n");
-		return 0;
-	}
 	std::string hash_password = hash(password);//get the hashed password.
 	
 	std::string statement = "select * from ";
