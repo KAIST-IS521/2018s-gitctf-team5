@@ -414,13 +414,15 @@ int Server::do_user(std::string arg)
 	}
 	if(!std::regex_match(username, filterString))
 	{
+		sendMsg("[!] username : regex : ^[a-zA-Z0-9]*$\n");
 		printf("[!] username : regex : ^[a-zA-Z0-9]*$\n");
 		return 0;
 	}
 
 	if(!std::regex_match(password, filterString))
 	{
-		printf("[!] userpass regex : ^[a-zA-Z0-9]*$\n");
+		sendMsg("[!] password : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] password : regex : ^[a-zA-Z0-9]*$\n");
 		return 0;
 	}
 	std::string hash_password = hash(password);//get the hashed password.
@@ -456,7 +458,17 @@ int Server::do_user(std::string arg)
 
 int Server::do_size(std::string arg)
 {
-	std::string file_path = current_dir + arg;	
+	std::string file_path = current_dir + arg;
+
+	std::regex filterString("^[a-zA-Z0-9]*$");
+
+	if(!std::regex_match(arg, filterString))
+	{
+		sendMsg("[!] file_path : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] file_path : regex : ^[a-zA-Z0-9]*$\n");
+		return -1;
+	}
+
 	if(check_filename(file_path) != 1)
 	{
 		sendMsg("550 Could not get file size.");
@@ -487,6 +499,16 @@ int Server::do_size(std::string arg)
 int Server::do_cwd(std::string arg)
 {
 	std::string file_path = current_dir + arg;
+	std::regex filterString("^[a-zA-Z0-9]*$");
+
+	if(!std::regex_match(arg, filterString))
+	{
+		sendMsg("[!] file_path : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] file_path : regex : ^[a-zA-Z0-9]*$\n");
+		return 0;
+	}
+
+
 	int file_type = check_filename(file_path);	
 	if(file_type == 0 || file_type == 1)
 	{
@@ -520,7 +542,15 @@ int Server::do_cwd(std::string arg)
 
 int Server::mk_dir(std::string dir_name)
 {
+	std::regex filterString("^[a-zA-Z0-9]*$");
 	std::string dir_path = current_dir + dir_name;
+	if(!std::regex_match(dir_name, filterString))
+	{
+		sendMsg("[!] file_path : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] file_path : regex : ^[a-zA-Z0-9]*$\n");
+		return -1;
+	}
+
 	if(check_filename_out_of_bound(dir_path) == 1)
 	{
 		return -1;
@@ -535,6 +565,7 @@ int Server::do_mkd(std::string arg)
 	ss<<arg;
 	ss>>dir_name;
 	ss.clear();
+
 	if(mk_dir(dir_name) == -1)
 	{
 		sendMsg("550 Create directory operation failed.");
@@ -564,8 +595,16 @@ int Server::do_cdup()
 
 int Server::do_dele(std::string arg)
 {
+	std::regex filterString("^[a-zA-Z0-9]*$");
 	std::string file_path = current_dir + arg;		
 	struct stat st;	
+	if(!std::regex_match(arg, filterString))
+	{
+		sendMsg("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		return -1;
+	}
+
 	if(lstat(file_path.c_str(),&st) == -1)
 	{
 		sendMsg("550 Delete operation failed.");
@@ -591,8 +630,17 @@ int Server::do_dele(std::string arg)
 
 int Server::do_rmd(std::string arg)
 {
+	std::regex filterString("^[a-zA-Z0-9]*$");
 	std::string file_path = current_dir + arg;	
 	struct stat st;
+	if(!std::regex_match(arg, filterString))
+	{
+		sendMsg("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		return -1;
+	}
+
+
 	if(lstat(file_path.c_str(),&st) == -1)
 	{
 		sendMsg("550 Remove directory operation failed.");
@@ -915,6 +963,15 @@ int Server::do_list()
 
 int Server::do_retr(std::string arg)
 {
+	std::regex filterString("^[a-zA-Z0-9]*$");
+
+	if(!std::regex_match(arg, filterString))
+	{
+		sendMsg("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		return -1;
+	}
+
 	if(datafd == -1)//datafd = -1 means no connection,datafd > 0 means pasv mode.
 	{
 		sendMsg("425 Use PORT or PASV first.");
@@ -981,6 +1038,16 @@ int Server::do_retr(std::string arg)
 
 int Server::do_stor(std::string arg)
 {
+	std::regex filterString("^[a-zA-Z0-9]*$");
+
+	if(!std::regex_match(arg, filterString))
+	{
+		sendMsg("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		printf("[!] arg : regex : ^[a-zA-Z0-9]*$\n");
+		return -1;
+	}
+
+
 	if(datafd == -1)//datafd = -1 means no connection,datafd > 0 means pasv mode.
 	{
 		sendMsg("425 Use PORT or PASV first.");
