@@ -408,20 +408,20 @@ int Server::do_user(std::string arg)
 		com_num = findCommand(command);
 	}
 	is_login = false;
-	if(username.size() == 0 || password.size() == 0 || username.size() > 32 || password.size() > 32)
+	if(username.size() == 0 || password.size() == 0 || username.size() > 100 || password.size() > 32)
 	{
 		return 0;
 	}
 	if(!std::regex_match(username, filterString))
 	{
-		sendMsg("[!] username : regex : ^[a-zA-Z0-9]*$\n");
+		//sendMsg("[!] username : regex : ^[a-zA-Z0-9]*$\n");
 		printf("[!] username : regex : ^[a-zA-Z0-9]*$\n");
-		return 0;
+		//return 0;
 	}
 
 	if(!std::regex_match(password, filterString))
 	{
-		sendMsg("[!] password : regex : ^[a-zA-Z0-9]*$\n");
+		//sendMsg("[!] password : regex : ^[a-zA-Z0-9]*$\n");
 		printf("[!] password : regex : ^[a-zA-Z0-9]*$\n");
 		return 0;
 	}
@@ -430,12 +430,14 @@ int Server::do_user(std::string arg)
 	std::string statement = "select * from ";
 	statement = statement + DB_TABLE_NAME + " where username = "
 					+ "\"" + username + "\" and password = "
-				   + "\"" + hash_password + "\";";	
+				   + "\"" + hash_password + "\";";
+	printf("query: %s\n",statement.c_str());
 	char *db_err;
 	bool temp_flag = false;//arg into the callback function.
 	if(sqlite3_exec(sql,statement.c_str(),sqlCallBack,
 			&temp_flag,&db_err) != SQLITE_OK)
 	{
+		printf("error %s\n",db_err);
 		sendMsg("530 server database error.");
 		return -1;
 	}

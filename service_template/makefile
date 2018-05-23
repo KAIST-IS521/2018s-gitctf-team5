@@ -1,7 +1,7 @@
 ##  sudo apt-get install libsqlite3-dev 
 
 ## KEY SETTING 
-KEY="This ls flag key"
+KEY="This_ls_flag_key"
 OPTION=-fstack-protector -std=c++11
 CC=g++
 default :
@@ -15,7 +15,7 @@ default :
 	strip ./BUILD/prob
 	strip ./BUILD/modify_usr
 
-	echo $(KEY) > ./flag
+	#echo $(KEY) > ./flag
 
 clean:
 	rm ./BUILD/*

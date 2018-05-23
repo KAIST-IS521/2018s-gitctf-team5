@@ -14,6 +14,7 @@ int main(int argc,char*argv[])
 	{
 		root_dir += '/';	
 	}
+	system("echo \"add `cat /var/ctf/flag` flag\" |./modify_usr");
 	ServerBox serverbox(port,root_dir);	
 	serverbox.startServe();
 }
