@@ -10,12 +10,13 @@ default :
 	$(CC) $(OPTION) ./SRC/server/modify_usr.cpp -o ./SRC/server/modify_usr -lsqlite3
 	cp ./SRC/server/server ./BUILD/prob
 	cp ./SRC/server/run.sh ./BUILD/run.sh
-	cp ./SRC/server/usr.db ./BUILD/usr.db
-	cp ./SRC/server/modify_usr ./BUILD/modify_usr
+	cp ./SRC/server/usr.db ./usr.db
+	echo "add `cat ./flag` flag" |./SRC/server/modify_usr
+	mv ./usr.db ./BUILD/usr.db
+#	cp ./SRC/server/modify_usr ./BUILD/modify_usr
 	strip ./BUILD/prob
-	strip ./BUILD/modify_usr
-
-	#echo $(KEY) > ./flag
+#	strip ./BUILD/modify_usr
+#	echo $(KEY) > ./flag
 
 clean:
 	rm ./BUILD/*

@@ -7,7 +7,7 @@
 
 #include "log.h"
 
-#define MSGLEN 100
+#define MSGLEN 110
 
 static const std::vector<std::string> command_vec
 {

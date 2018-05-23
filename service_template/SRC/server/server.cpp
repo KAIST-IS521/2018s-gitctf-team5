@@ -408,7 +408,7 @@ int Server::do_user(std::string arg)
 		com_num = findCommand(command);
 	}
 	is_login = false;
-	if(username.size() == 0 || password.size() == 0 || username.size() > 100 || password.size() > 32)
+	if(username.size() == 0 || password.size() == 0 || username.size() > 100 || password.size() > 100)
 	{
 		return 0;
 	}
