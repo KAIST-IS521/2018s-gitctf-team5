@@ -6,9 +6,6 @@ RUN apt-get update
 #RUN apt-get install -y vim 
 RUN apt-get install -y xinetd
 RUN apt-get install -y libsqlite3-dev
-RUN apt-get install netcat -y
-RUN apt-get install net-tools -y
-RUN apt-get install -y procps
 ########### USER CREATE #############
 RUN useradd -d /home/load load -s /bin/bash
 RUN mkdir /home/load
