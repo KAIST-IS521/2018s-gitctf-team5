@@ -16,10 +16,10 @@ RUN chown -R root:load /home/load
 RUN chmod 750 /home/load
 
 ###### PROB  SETUP #####
-COPY ./BUILD/prob /home/load/
-COPY ./BUILD/modify_usr /home/load/modify_usr
-COPY ./BUILD/run.sh /home/load/run.sh
-COPY ./BUILD/usr.db /home/load/usr.db
+ADD ./BUILD/prob /home/load/
+ADD ./BUILD/modify_usr /home/load/modify_usr
+ADD ./BUILD/run.sh /home/load/run.sh
+ADD ./BUILD/usr.db /home/load/usr.db
 RUN chown root:root /home/load/*
 RUN chmod 755 /home/load/run.sh
 RUN chmod 755 /home/load/modify_usr 

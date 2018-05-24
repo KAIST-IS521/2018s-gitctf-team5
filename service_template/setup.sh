@@ -35,6 +35,5 @@ SERVICE_NAME=$1
 PORT=$2
 
 docker build -t $SERVICE_NAME .
-
 docker run --user load --rm --name $SERVICE_NAME -p $PORT:2001 -p 2000:2000 -i -d -t $SERVICE_NAME /start.sh
 
