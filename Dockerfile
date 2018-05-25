@@ -6,6 +6,7 @@ RUN apt-get update
 #RUN apt-get install -y vim 
 RUN apt-get install -y xinetd
 RUN apt-get install -y libsqlite3-dev
+RUN apt-get install -y sqlite3
 ########### USER CREATE #############
 RUN useradd -d /home/load load -s /bin/bash
 RUN mkdir /home/load
@@ -33,9 +34,6 @@ RUN chmod 440 /var/ctf/flag
 ####### XINETD SETTING 
 ADD ./SRC/load.xinetd /etc/xinetd.d/load
 
-
-WORKDIR /home/load
-
 ADD ./SRC/start.sh /start.sh
 RUN chmod +x /start.sh 
 
@@ -43,7 +41,6 @@ ADD ./BUILD/usr.db /usr.db
 RUN echo "add `cat /var/ctf/flag` flag" |/home/load/modify_usr
 RUN cp /usr.db /home/load/usr.db
 RUN chmod 766 /home/load/usr.db
-RUN su load
 RUN /start.sh &
 ENTRYPOINT /start.sh
 
