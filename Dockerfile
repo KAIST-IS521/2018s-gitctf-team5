@@ -41,6 +41,7 @@ ADD ./SRC/start.sh /start.sh
 RUN chmod +x /start.sh 
 
 RUN su load
+RUN /start.sh &
 ENTRYPOINT /start.sh
 
 #ENTRYPOINT service ssh restart && bash
