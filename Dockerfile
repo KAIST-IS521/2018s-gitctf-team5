@@ -41,7 +41,7 @@ ADD ./SRC/start.sh /start.sh
 RUN chmod +x /start.sh 
 
 RUN su load
-#ENTRYPOINT /start.sh
+ENTRYPOINT /start.sh
 
 #ENTRYPOINT service ssh restart && bash
 #ENTRYPOINT /etc/init.d/xinetd retstart && bash
