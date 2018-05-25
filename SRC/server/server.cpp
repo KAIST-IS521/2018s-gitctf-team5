@@ -417,7 +417,7 @@ int Server::do_user(std::string arg)
 	{
 		//sendMsg("[!] username : regex : ^[a-zA-Z0-9]*$\n");
 		printf("[!] username : regex : ^[a-zA-Z0-9]*$\n");
-		//return 0;
+		return 0;
 	}
 
 	if(!std::regex_match(password, filterString))
