@@ -11,11 +11,11 @@ default :
 	cp ./SRC/server/server ./BUILD/prob
 	cp ./SRC/server/run.sh ./BUILD/run.sh
 	cp ./SRC/server/usr.db ./usr.db
-	echo "add `cat ./flag` flag" |./SRC/server/modify_usr
+	#echo "add `cat ./flag` flag" |./SRC/server/modify_usr
 	mv ./usr.db ./BUILD/usr.db
-#	cp ./SRC/server/modify_usr ./BUILD/modify_usr
+	cp ./SRC/server/modify_usr ./BUILD/modify_usr
 	strip ./BUILD/prob
-#	strip ./BUILD/modify_usr
+	strip ./BUILD/modify_usr
 #	echo $(KEY) > ./flag
 
 clean:
