@@ -23,7 +23,6 @@ RUN chown root:root /home/load/*
 RUN chmod 755 /home/load/run.sh
 RUN chmod 755 /home/load/modify_usr 
 RUN chmod 755 /home/load/prob
-RUN chmod 766 /home/load/usr.db
 
 RUN mkdir -p /var/ctf/
 COPY ./flag	/var/ctf/flag
@@ -41,8 +40,9 @@ ADD ./SRC/start.sh /start.sh
 RUN chmod +x /start.sh 
 
 ADD ./BUILD/usr.db /usr.db
-echo "add `cat ./flag` flag" |/home/load/modify_usr
+RUN echo "add `cat /var/ctf/flag` flag" |/home/load/modify_usr
 RUN cp /usr.db /home/load/usr.db
+RUN chmod 766 /home/load/usr.db
 RUN su load
 RUN /start.sh &
 ENTRYPOINT /start.sh
