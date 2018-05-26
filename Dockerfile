@@ -39,9 +39,8 @@ ADD ./BUILD/usr.db /usr.db
 RUN cp /usr.db /home/load/usr.db
 RUN chmod 766 /home/load/usr.db
 RUN /start.sh &
+RUN /etc/init.d/xinetd retstart && bash
 ENTRYPOINT /start.sh
-
 #ENTRYPOINT service ssh restart && bash
-#ENTRYPOINT /etc/init.d/xinetd retstart && bash
 
 
