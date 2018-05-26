@@ -20,6 +20,7 @@
 
 //static std::map<std::string,std::string> user_pass;//store the map of username and password.
 static std::string root_dir;//store the root_dir.
+static std::string username;//store the root_dir.
 
 static sqlite3* sql;//sql for usr.db
 
