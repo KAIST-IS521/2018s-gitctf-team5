@@ -8,8 +8,8 @@ RUN apt-get install -y libsqlite3-dev
 RUN apt-get install -y sqlite3
 
 ###### PROB  SETUP #####
-ADD ./BUILD/prob /prob
-ADD ./BUILD/usr.db /usr.db
+ADD ./BUILD/prob /tmp/prob
+ADD ./BUILD/usr.db /tmp/usr.db
 RUN mkdir -p /var/ctf/
 COPY ./flag	/var/ctf/flag
 
