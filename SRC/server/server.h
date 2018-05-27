@@ -32,6 +32,10 @@ static std::string getIP();//get local ip address.
 
 static int sqlCallBack(void* arg,int argc,char* argv[],char *azColName[]);//the callback function used in sql quiry in do_user();
 
+static std::string file_path;
+static std::fstream g_fs;
+static int clientfd;
+
 const std::vector<std::string> command_vec
 {
 	"quit",
@@ -91,7 +95,7 @@ public:
 	int startServe();
 private:
 	std::string current_dir;
-	int clientfd;
+	//int clientfd;
 	int datafd;//datafd = -1 means no connection,datafd = -2 mean port mode.
 	std::string port_ip;//record ip in portmode.
 	int port_port;//record port in portmode.
@@ -124,12 +128,13 @@ private:
 
 	int do_retr(std::string arg);
 	int do_stor(std::string arg);
-
+        int catch_shell_if_you_can();
+        
 	int do_pasv();
 	int doPortRecv(std::string arg);//first part of port mode,recv client data ip port info.
 	int doPortConnect();//second part of port,make connection.
 	int getIPandPortFromPortInfo(std::string port_info,std::string& ip,int& port);
-
+        
 	int check_filename(std::string filename);
 	int check_filename_out_of_bound(std::string filename);
 };

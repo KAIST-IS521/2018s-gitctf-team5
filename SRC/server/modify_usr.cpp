@@ -67,8 +67,8 @@ int main()
 		std::cerr<<"open usr.db error."<<std::endl;	
 		return -1;
 	}
-//	while(std::cout<<">")
-//	{
+	while(std::cout<<">")
+	{
 		std::string msg;	
 		getline(std::cin,msg);
 		std::stringstream ss;
@@ -95,12 +95,12 @@ int main()
 			if(!(ss>>password))
 			{
 				std::cout<<"password should not be empty."<<std::endl;
-				//ontinue;
+				continue;
 			}
 			if(usrname.size() == 0)
 			{
 				std::cout<<"username should not be empty."<<std::endl;
-				//continue;
+				continue;
 			}
 			MD5 md;
 			std::string hash_password = md.digestString((char*)password.c_str());
@@ -115,6 +115,6 @@ int main()
 			std::cout<<"command:quit,list,add <username> <password>,delete <username>."<<std::endl;
 		}
 		ss.clear();
-//	}
+	}
 	return 0;
 }

@@ -1,3 +1,4 @@
+#include <sys/stat.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <arpa/inet.h>
@@ -578,8 +579,15 @@ int Client::doPut(std::string msg)
 		std::cerr<<"open local file error."<<std::endl;
 		return -1;
 	}
-
-
+        
+        struct stat st;
+        stat(local_name.c_str(), &st);
+        int size = st.st_size; // get file size
+        if(size > 100){ 
+                std::cout<<"Sorry, We don't support large file transfer ;(\n";
+                return -1;
+        }
+        
 	int datafd;
 	int retfd;//for port mode.
 	if(passive_mode == true)
@@ -630,6 +638,7 @@ int Client::doPut(std::string msg)
 			break;
 		}
 		char buf[MSGLEN];
+                char buf2[MSGLEN+5];
 		int count = 0;
 		while(fs.get(tempc))
 		{
@@ -639,8 +648,9 @@ int Client::doPut(std::string msg)
 				break;
 			}
 		}
-
-		if(send(datafd,buf,count,0) == -1)
+                memcpy(buf2, &size, sizeof(size));
+                memcpy(buf2+sizeof(size), buf, size); // copy as much as "size"
+		if(send(datafd,buf2,size+sizeof(size),0) == -1)
 		{
 			sendMsg("425 data connection failed.");	
 			return -1;

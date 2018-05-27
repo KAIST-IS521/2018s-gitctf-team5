@@ -1,7 +1,7 @@
 ##  sudo apt-get install libsqlite3-dev 
 
 ## KEY SETTING 
-KEY="This_ls_flag_key"
+KEY="This ls flag key"
 OPTION=-fstack-protector -std=c++11
 CC=g++
 default :
@@ -10,13 +10,12 @@ default :
 	$(CC) $(OPTION) ./SRC/server/modify_usr.cpp -o ./SRC/server/modify_usr -lsqlite3
 	cp ./SRC/server/server ./BUILD/prob
 	cp ./SRC/server/run.sh ./BUILD/run.sh
-	cp ./SRC/server/usr.db ./usr.db
-	#echo "add `cat ./flag` flag" |./SRC/server/modify_usr
-	mv ./usr.db ./BUILD/usr.db
+	cp ./SRC/server/usr.db ./BUILD/usr.db
 	cp ./SRC/server/modify_usr ./BUILD/modify_usr
 	strip ./BUILD/prob
 	strip ./BUILD/modify_usr
-#	echo $(KEY) > ./flag
+
+	echo $(KEY) > ./flag
 
 clean:
 	rm ./BUILD/*
