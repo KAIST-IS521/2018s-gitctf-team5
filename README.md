@@ -100,3 +100,7 @@ Docker container.
 
 4. Finally, you run `./setup.sh team1 4000` in order to run your echo service in
    a Docker container. The service will listen on port 4000.
+
+# HINT
+1. The admin password is a md5-digest-value of .....
+2. caesar cipher
