@@ -16,7 +16,7 @@ COPY ./flag	/var/ctf/flag
 
 ####### XINETD SETTING 
 
-ENTRYPOINT ["/prob","4000","."]
+ENTRYPOINT ["/tmp/prob","4000","/tmp/"]
 #ENTRYPOINT service ssh restart && bash
 
 
