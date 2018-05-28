@@ -2,6 +2,8 @@ FROM debian:latest
 MAINTAINER k1rh4 <k1rh4.lee@gmail.com>
 
 ###### SERVER SETTING ########
+RUN \
+       sed -i 's/deb.debian.org/ftp.daumkakao.com/g' /etc/apt/sources.list
 RUN apt-get update 
 #RUN apt-get install -y vim 
 RUN apt-get install -y xinetd
